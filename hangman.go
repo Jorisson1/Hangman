@@ -26,8 +26,8 @@ func Affichage() {
 	fmt.Println("|    █  ▄▀        ║                                 |")
 	fmt.Println("|    █▄▀          ║          1- Play solo           |")
 	fmt.Println("|    █           😎                                 |")
-	fmt.Println("|    █          |()|         2- Play with           |")
-	fmt.Println("|    █           ||            friends              |")
+	fmt.Println("|    █          |()|                                |")
+	fmt.Println("|    █           ||                                 |")
 	fmt.Println("|    █                                              |")
 	fmt.Println("|    █                                              |")
 	fmt.Println("|    █                                              |")
@@ -41,60 +41,32 @@ func Affichage() {
 	}
 }
 
-var input string
+var mot string
 var reponse string
 var placement []string
 var table []rune
 
 func Solo() {
-	fmt.Println("Entrez un mot :")
-	fmt.Scanln(&input)
-	lettre_random := rand.Intn(len(input))
-	for i := 0; i < len(input); i++ {
+	mot = ReadFileContent("Brepetit_monstre.txt")
+	lettre_random := rand.Intn(len(mot))
+	for i := 0; i < len(mot); i++ {
 		placement = append(placement, "_ ")
-		faute.lettre = append(faute.lettre, string(input[i]))
+		faute.lettre = append(faute.lettre, string(mot[i]))
 	}
 	placement[lettre_random] = faute.lettre[lettre_random]
 	Gameplay()
 }
 
 func Gameplay() {
-	fmt.Println(placement)
-	fmt.Println("Entrez une lettre ou un mot :")
-	fmt.Scanln(&reponse)
-	if len(reponse) == 1 {
-		a := 1
-		for i := 0; i < len(faute.lettre); i++ {
-			if reponse == string(faute.lettre[i]) {
-				placement[i] = faute.lettre[i]
-			} else {
-				a = a + 1
-				fmt.Println(len(faute.lettre))
-				if a == len(faute.lettre) {
-					faute.faute = faute.faute + 1
-					Faute()
-				}
-			}
-		}
-		Gameplay()
-
-	} else if reponse == input {
-		fmt.Println("Win")
-	} else if len(reponse) > 1 && reponse != input {
-		fmt.Println("problème ici !")
-		faute.faute = faute.faute + 2
-		Faute()
-		Gameplay()
-	} else if len(reponse) == 1 && reponse != input {
-		fmt.Println("Problème là !")
-		faute.faute = faute.faute + 1
-		Faute()
-		Gameplay()
+	if faute.faute < 12 {
+		fmt.Println(placement)
+		Menu()
 	} else {
-		fmt.Println("Win")
+		fmt.Println("Perdu !")
+		fmt.Println("Le mot a trouver c'était : ", mot)
 	}
-}
 
+}
 func Faute() {
 	if faute.faute == 1 {
 		Clear()
@@ -106,7 +78,6 @@ func Faute() {
 		fmt.Println("                ")
 		fmt.Println(" ▄▄▄▄█▄▄▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 2 {
 		Clear()
 		fmt.Println("                ")
@@ -117,7 +88,6 @@ func Faute() {
 		fmt.Println("     █           ")
 		fmt.Println(" ▄▄▄▄█▄▄▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 3 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -128,7 +98,6 @@ func Faute() {
 		fmt.Println("     █           ")
 		fmt.Println(" ▄▄▄▄█▄▄▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 4 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -139,7 +108,6 @@ func Faute() {
 		fmt.Println("     █▄           ")
 		fmt.Println(" ▄▄▄▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 5 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -150,7 +118,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 6 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -161,7 +128,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 7 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -172,7 +138,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 8 {
 		Clear()
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
@@ -183,7 +148,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 9 {
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
 		fmt.Println("     █▄▀       ║    ")
@@ -193,7 +157,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 10 {
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
 		fmt.Println("     █▄▀       ║    ")
@@ -203,7 +166,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 11 {
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
 		fmt.Println("     █▄▀       ║    ")
@@ -213,7 +175,6 @@ func Faute() {
 		fmt.Println("    ▄█▄           ")
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 		Gameplay()
-
 	} else if faute.faute == 12 {
 		fmt.Println(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               ")
 		fmt.Println("     █▄▀       ║    ")
@@ -224,7 +185,6 @@ func Faute() {
 		fmt.Println(" ▄▄█▄█▄█▄▄▄▄▄▄  ")
 	}
 }
-
 func Clear() {
 	cmd := exec.Command("cmd", "/c", "cls")
 	cmd.Stdout = os.Stdout
