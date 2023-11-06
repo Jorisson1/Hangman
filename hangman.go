@@ -41,18 +41,17 @@ func Affichage() {
 	}
 }
 
-var input string
+var mot string
 var reponse string
 var placement []string
 var table []rune
 
 func Solo() {
-	fmt.Println("Entrez un mot :")
-	fmt.Scanln(&input)
-	lettre_random := rand.Intn(len(input))
-	for i := 0; i < len(input); i++ {
+	mot = ReadFileContent("Brepetit_monstre.txt")
+	lettre_random := rand.Intn(len(mot))
+	for i := 0; i < len(mot); i++ {
 		placement = append(placement, "_ ")
-		faute.lettre = append(faute.lettre, string(input[i]))
+		faute.lettre = append(faute.lettre, string(mot[i]))
 	}
 	placement[lettre_random] = faute.lettre[lettre_random]
 	Gameplay()
@@ -78,14 +77,14 @@ func Gameplay() {
 		}
 		Gameplay()
 
-	} else if reponse == input {
+	} else if reponse == mot {
 		fmt.Println("Win")
-	} else if len(reponse) > 1 && reponse != input {
+	} else if len(reponse) > 1 && reponse != mot {
 		fmt.Println("problème ici !")
 		faute.faute = faute.faute + 2
 		Faute()
 		Gameplay()
-	} else if len(reponse) == 1 && reponse != input {
+	} else if len(reponse) == 1 && reponse != mot {
 		fmt.Println("Problème là !")
 		faute.faute = faute.faute + 1
 		Faute()
