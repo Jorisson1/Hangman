@@ -58,9 +58,43 @@ func Solo() {
 }
 
 func Gameplay() {
+<<<<<<< HEAD
 	if faute.faute < 12 {
 		fmt.Println(placement)
 		Menu()
+=======
+	fmt.Println(placement)
+	fmt.Println("Entrez une lettre ou un mot :")
+	fmt.Scanln(&reponse)
+	if len(reponse) == 1 {
+		a := 1
+		for i := 0; i < len(faute.lettre); i++ {
+			if reponse == string(faute.lettre[i]) {
+				placement[i] = faute.lettre[i]
+			} else {
+				a = a + 1
+				fmt.Println(len(faute.lettre))
+				if a == len(faute.lettre) {
+					faute.faute = faute.faute + 1
+					Faute()
+				}
+			}
+		}
+		Gameplay()
+
+	} else if reponse == mot {
+		fmt.Println("Win")
+	} else if len(reponse) > 1 && reponse != mot {
+		fmt.Println("problème ici !")
+		faute.faute = faute.faute + 2
+		Faute()
+		Gameplay()
+	} else if len(reponse) == 1 && reponse != mot {
+		fmt.Println("Problème là !")
+		faute.faute = faute.faute + 1
+		Faute()
+		Gameplay()
+>>>>>>> 2a3dec5ca23dc75b5b2df323763f18cec03771ab
 	} else {
 		fmt.Println("Perdu !")
 		fmt.Println("Le mot a trouver c'était : ", mot)
